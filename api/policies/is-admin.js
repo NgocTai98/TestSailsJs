@@ -12,23 +12,23 @@ module.exports = async function (req, res, next) {
         token = credentials;
       }
     } else {
-      return res.json(401, {err: 'Format is Authorization: Bearer [token]'});
+      return res.json(401, {err: 'Định dạng phải ở dạng : Bearer [token]'});
     }
   } else if (req.param('token')) {
    token = req.param('token');
     // We delete the token from param to not mess with blueprints
     delete req.query.token;
   } else {
-    return res.json(401, {err: 'No Authorization header was found'});
+    return res.json(401, {err: 'Không tìm thấy Authorization'});
   }
 
    jwToken.verify(token, function (err, token) {
-    if (err) return res.json(401, {err: 'Invalid Admin Token!'});
+    if (err) return res.json(401, {err: 'Token không hợp lệ!'});
     if (token.role == '2') {
       req.token = token; // This is the decrypted token or the payload you provided
       next();
     }else{
-    return res.json(403, {err: 'Your role is not a admin'});
+    return res.json(403, {err: 'Admin mới có quyền thực hiện việc này'});
 
     }
     

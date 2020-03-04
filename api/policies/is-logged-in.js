@@ -1,28 +1,5 @@
 module.exports = async function (req, res, next) {
 
-  // let token;
-  // if (req.headers && req.headers.token) {
-  //   token = req.headers.token;
-  //   if (token.length <= 0) return res.json(401, {
-  //     err: 'Format is Authorization: Bearer [token]'
-  //   });
-  // } else if (req.param('token')) {
-  //   token = req.param('token');
-  //   // We delete the token from param to not mess with blueprints
-  //   delete req.query.token;
-  // } else {
-  //   return res.json(401, {
-  //     err: 'No Authorization header was found'
-  //   });
-  // }
-  // jwToken.verify(token, function (err, token) {
-  //   if (err) return res.json(401, {
-  //     err: 'Invalid Token!'
-  //   });
-  //   req.token = token; // This is the decrypted token or the payload you provided
-  //   next();
-  // });
-
   var token;
 
   if (req.headers && req.headers.authorization) {
@@ -35,18 +12,18 @@ module.exports = async function (req, res, next) {
         token = credentials;
       }
     } else {
-      return res.json(401, {err: 'Format is Authorization: Bearer [token]'});
+      return res.json(401, {err: 'Định dạng phải ở dạng : Bearer [token]'});
     }
   } else if (req.param('token')) {
     token = req.param('token');
     // We delete the token from param to not mess with blueprints
     delete req.query.token;
   } else {
-    return res.json(401, {err: 'No Authorization header was found'});
+    return res.json(401, {err: 'Không tìm thấy Authorization'});
   }
-
+ 
   jwToken.verify(token, function (err, token) {
-    if (err) return res.json(401, {err: 'Invalid Token!'});
+    if (err) return res.json(401, {err: 'Token không hợp lệ!'});
     req.token = token; // This is the decrypted token or the payload you provided
       next();
    

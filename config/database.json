@@ -1,0 +1,22 @@
+{
+    "dev": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "userstest",
+        "driver": "mysql",
+        "multipleStatements": true
+    },
+    "test": {
+        "driver": "mysql",
+        "filename": ":memory:"
+    },
+    "prod": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "userstest",
+        "driver": "mysql"
+    }
+    
+}

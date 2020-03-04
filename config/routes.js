@@ -51,7 +51,13 @@ module.exports.routes = {
   'GET /admin/delete/:id': {
     controller: 'UserController',
     action: 'delete',
+  },
+
+  "POST /test": {
+    controller: 'UserController',
+    action: 'test'
   }
+
 
 
   /***************************************************************************

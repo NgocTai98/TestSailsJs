@@ -72,8 +72,11 @@ module.exports = {
           user: user
         });
     }
-
-
   },
+  test: async function (req, res) {
+   
+     let a = await Test1.create({name: req.param('name')}).fetch();
+      return res.json(a);
+  }
 
 };

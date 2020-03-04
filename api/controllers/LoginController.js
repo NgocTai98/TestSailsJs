@@ -20,7 +20,8 @@ module.exports = {
         return res.json({
           status: 'success',
           message: 'Đăng ký thành công',
-          user: user
+          user: user,
+          token: jwToken.issue({id: user.id, role: user.level })
         })
     }
   },
